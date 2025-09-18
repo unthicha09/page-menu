@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>งบประมาณรายเดือน</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .container {
+        flex: 1;
+        max-width: 430px;
+        margin: auto;
+        padding: 20px;
+        padding-bottom: 80px;
+        box-sizing: border-box;
+        margin-top: 15%; /* <-- ตรงนี้แหละที่ทำให้มันดันลงไป */
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        margin-top: 15px;
+        box-sizing: border-box;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .budget-value {
+        font-size: 30px;
+        font-weight: bold;
+        color: #2ecc71;
+        margin: 10px 0;
+      }
+
+      .budget-value2 {
+        font-size: 14px;
+        font-weight: bold;
+        color: #2ecc71;
+        margin: 10px 0;
+      }
+
+      .btn-edit {
+        display: inline-block;
+        background: #f9b234;
+        color: #fff;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 15px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 20px;
+      }
+
+      .summary {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        margin-top: 15px;
+        box-sizing: border-box;
+      }
+
+      .summary-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #1a3c6e;
+        margin-bottom: 8px;
+      }
+
+      .summary-desc {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+
+      .summary-box {
+        background: #fdf2e3;
+        border: 1px solid #4db894;
+        border-radius: 12px;
+        padding: 12px;
+      }
+
+      .summary-header,
+      .summary-footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      .summary-header span:first-child {
+        font-weight: bold;
+        color: #8b2c00;
+      }
+
+      .summary-footer {
+        font-size: 13px;
+        color: #8b2c00;
+      }
+
+      .progress-bar {
+        background: #ffc64b;
+        border-radius: 8px;
+        height: 16px;
+        position: relative;
+        overflow: hidden;
+        margin: 6px 0;
+      }
+
+      .progress-fill {
+        background: #e74c3c;
+        height: 100%;
+        width: 0%;
+        border-radius: 8px;
+        transition: width 0.5s;
+      }
+
+      .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        width: 85%;
+        max-width: 350px;
+        text-align: center;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        color: #777;
+        cursor: pointer;
+      }
+
+      .toggle {
+        width: 60px;
+        height: 30px;
+        background: #9eada8;
+        border-radius: 20px;
+        margin: 10px auto;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .toggle-circle {
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        transition: 0.3s;
+      }
+
+      .toggle.active {
+        background: #2ecc71;
+      }
+
+      .toggle.active .toggle-circle {
+        left: 33px;
+      }
+
+      .popup input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .btn-save {
+        background: #2ecc71;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #4db894;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding: 6px 0;
+      }
+
+      nav a.active {
+        color: #0a3d62;
+      }
+
+      nav a.active {
+        color: #0a3d62;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- ปุ่มย้อนกลับ -->
+      <a href="profile.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <!-- การ์ดงบประมาณ -->
+      <div class="card">
+        <h3>งบประมาณรายเดือน</h3>
+        <div class="budget-value" id="budgetValue">5000</div>
+        <div class="budget-value2" id="budgetValue2">THB / เดือน</div>
+        <div class="btn-edit" onclick="openPopup()">แก้ไขงบประมาณ</div>
+      </div>
+
+      <!-- การ์ดสรุป -->
+      <div class="summary">
+        <div class="summary-title"><i class="fas fa-calendar"></i> ภาพรวม</div>
+        <p class="summary-desc">
+          ระบุงบประมาณในแต่ละเดือนของคุณจากนั้นสามารถดูงบประมาณที่ใช้และคงเหลือได้ที่เมนูสรุปรายเดือน
+        </p>
+
+        <div class="summary-box">
+          <div class="summary-header">
+            <span>งบประมาณที่ใช้ไป</span>
+            <span id="usedAmount">298 THB</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="summary-footer" id="progressText">
+            <span>6% ถูกใช้ไป</span>
+            <span id="budgetUsedText">298/5000 THB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav>
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-th-large"></i></a>
+      <a href="#"><i class="fas fa-chart-line"></i></a>
+      <a href="#" class="active"><i class="fas fa-bars"></i></a>
+    </nav>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+      <div class="popup">
+        <div class="close-btn" onclick="closePopup()">&times;</div>
+        <h2>งบประมาณรายเดือนของฉัน</h2>
+        <div class="toggle" id="toggleBtn" onclick="toggleSwitch()">
+          <div class="toggle-circle"></div>
+        </div>
+        <p style="color: #666; font-size: 14px">ตั้งงบประมาณสำหรับ 1 เดือน</p>
+        <input type="number" id="budgetInput" value="5000" />
+        <button class="btn-save" onclick="saveBudget()">บันทึก</button>
+      </div>
+    </div>
+
+    <script>
+      let budget = 5000; // งบตั้งต้น
+      let used = 298; // จำนวนเงินที่ใช้ไป
+
+      function updateProgress() {
+        const percent = Math.min((used / budget) * 100, 100);
+        document.getElementById("progressFill").style.width = percent + "%";
+        document.getElementById("progressText").innerHTML = `
+        <span>${Math.round(percent)}% ถูกใช้ไป</span>
+        <span>${used}/${budget} THB</span>
+      `;
+        document.getElementById("usedAmount").textContent = used + " THB";
+      }
+
+      updateProgress();
+
+      function openPopup() {
+        document.getElementById("popup").style.display = "flex";
+        document.getElementById("budgetInput").value = budget;
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+
+      function toggleSwitch() {
+        document.getElementById("toggleBtn").classList.toggle("active");
+      }
+
+      function saveBudget() {
+        const newBudget = parseInt(
+          document.getElementById("budgetInput").value
+        );
+        if (!isNaN(newBudget) && newBudget > 0) {
+          budget = newBudget;
+
+          // อัปเดตตัวเลขในหน้า
+          document.getElementById("budgetValue").textContent = budget;
+          document.getElementById("budgetValue2").textContent = "THB / เดือน";
+
+          // อัปเดต progress bar และ % ด้านล่าง
+          updateProgress();
+
+          // ปิด popup หลังบันทึก
+          closePopup();
+        }
+      }
+
+      const monthlyInput = document.getElementById("budgetInput");
+      monthlyInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          saveBudget();
+        }
+      });
+    </script>
+  </body>
+</html>

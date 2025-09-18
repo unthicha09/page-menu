@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ออกจากระบบ</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* ===== background เต็มจอ ===== */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* ตัดภาพให้เต็มจอ */
+        display: block;
+      }
+
+      /* overlay ทำให้ภาพอ่อนลง */
+      .background::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0.5; /* ปรับตามชอบ */
+      }
+
+      /* ===== เนื้อหาหน้า logout ===== */
+      .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        z-index: 1; /* ให้ content อยู่บน overlay */
+      }
+
+      /* ปุ่มกากบาท */
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 22px;
+        color: #c0392b;
+        cursor: pointer;
+      }
+
+      /* กล่องไอคอนออกจากระบบ */
+      .logout-box {
+        border: 2px solid #4db894;
+        border-radius: 16px;
+        padding: 30px 40px;
+        text-align: center;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.8); /* โปร่งนิดนึง */
+      }
+
+      .logout-box i {
+        font-size: 40px;
+        color: #4db894;
+        margin-bottom: 10px;
+      }
+
+      .logout-box p {
+        font-size: 18px;
+        font-weight: bold;
+        color: #4db894;
+      }
+
+      /* ปุ่มยืนยัน */
+      .btn-confirm {
+        background: #4db894;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px;
+        width: 80%;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      /* Navbar */
+      nav {
+        background: #4db894;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+      }
+
+      nav a {
+        color: #fff;
+        font-size: 22px;
+        text-decoration: none;
+        flex: 1;
+        text-align: center;
+      }
+
+      nav a.active {
+        color: #0a3d62;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- background -->
+    <div class="background">
+      <img src="ดอก1.png" alt="background" />
+    </div>
+
+    <div class="container">
+      <!-- ปุ่มกากบาท -->
+      <a href="Profile.html"
+        ><div class="close-btn"><i class="fas fa-times"></i></div
+      ></a>
+
+      <!-- กล่องออกจากระบบ -->
+
+      <div class="logout-box">
+        <i class="fas fa-right-from-bracket"></i>
+        <p>ออกจากระบบ</p>
+      </div>
+
+      <!-- ปุ่มยืนยัน -->
+      <button class="btn-confirm">ยืนยัน</button>
+    </div>
+
+    <!-- Navbar -->
+    <nav>
+      <a href="####"><i class="fas fa-home"></i></a>
+      <a href="#####"><i class="fas fa-th-large"></i></a>
+      <a href="####"><i class="fas fa-chart-line"></i></a>
+      <a href="####" class="active"><i class="fas fa-bars"></i></a>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>แก้ไขโปรไฟล์</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100vh;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 430px; /* iPhone 14/15 Pro */
+        padding: 20px;
+        padding-top: 70px;
+        padding-bottom: 80px; /* กันชนสำหรับ nav */
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      .card {
+        background: #4db894; /* สีเขียว */
+        border-radius: 16px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 20px;
+        color: #b00020;
+        cursor: pointer;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 20px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        overflow: hidden;
+      }
+
+      .avatar img {
+        width: 80px;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 95%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #0a3d62;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #07304e;
+      }
+
+      /* ----------------- NAVBAR ----------------- */
+      nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #4db894;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+        border-radius: 0px;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        padding: 12px 0;
+        border-radius: 0px 0px 0 0;
+        height: 20px;
+      }
+
+      nav a.active {
+        color: #0a3d62;
+      }
+    </style>
+
+    <!--//ใช้ CDN Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <a href="Profile.html"><div class="close-btn">&times;</div></a>
+
+        <div class="avatar">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
+            alt="avatar"
+          />
+        </div>
+
+        <div class="title">โปรไฟล์</div>
+
+        <div class="form-group">
+          <input type="text" id="nameInput" placeholder="กรอกชื่อใหม่" />
+        </div>
+
+        <button id="saveBtn">บันทึก</button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav>
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-th-large"></i></a>
+      <a href="#"><i class="fas fa-chart-line"></i></a>
+      <a href="#" class="active"><i class="fas fa-bars"></i></a>
+    </nav>
+
+    <script>
+      const nameInput = document.getElementById("nameInput");
+
+      // โหลดชื่อเก่าใส่ใน input
+      const oldName = localStorage.getItem("profileName");
+      if (oldName) {
+        nameInput.value = oldName;
+      }
+
+      // กดบันทึก -> เก็บชื่อใหม่ + ย้อนกลับหน้า Profile
+      document.getElementById("saveBtn").onclick = function () {
+        const newName = nameInput.value.trim();
+        if (newName) {
+          localStorage.setItem("profileName", newName);
+        }
+        window.location.href = "Profile.html";
+      };
+    </script>
+  </body>
+</html>

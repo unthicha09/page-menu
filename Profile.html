@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile UI</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* scroll เฉพาะแนวตั้ง */
+        padding-bottom: 60px; /* เว้นพื้นที่ให้ navbar */
+      }
+
+      /* ส่วนหัวโปรไฟล์ */
+      .profile-header {
+        background: #4db894;
+        color: white;
+        text-align: center;
+        padding: 50px 20px;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .profile-header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 15px;
+        background: #fff;
+        padding: 8px;
+        border: 2px solid #007aff;
+      }
+
+      .profile-header h2 {
+        margin: 10px 0 5px;
+        font-size: 20px;
+        color: #fff;
+      }
+
+      .profile-header p {
+        margin: 0;
+        font-size: 14px;
+        color: #f2f2f2;
+      }
+
+      .profile-header button {
+        padding: 10px 20px;
+        background-color: #ffc107;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin: 20px;
+      }
+
+      .profile-header .btn-profile {
+        background: #ffc107;
+        color: #ffffff;
+        border: none;
+        padding: 10px px;
+        margin-top: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* เมนู */
+      .menu {
+        padding: 30px;
+        padding-top: 50px;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: flex-start;
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 10px 16px;
+        margin: 20px 20px;
+        margin-top: 20px;
+        margin-bottom: 12px;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1),
+          -3px -3px 6px rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .menu-item:hover {
+        background: #f9f9f9;
+      }
+
+      .menu-item i {
+        font-size: 20px;
+        margin-right: 12px;
+        margin-top: 3px;
+        color: #333;
+        padding: 5px;
+      }
+
+      .menu-item .text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .menu-item .title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 3px;
+      }
+
+      .menu-item .subtitle {
+        font-size: 13px;
+        color: #777;
+        line-height: 1.4;
+      }
+
+      .menu-item span {
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      /* ปุ่มด้านล่าง */
+      .action-buttons {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .btn {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .action-buttons {
+        padding-top: 2px;
+      }
+
+      .btn-logout {
+        background: #4db8ff;
+        color: rgb(21, 82, 174);
+        width: 150px;
+        border-radius: 2cap;
+      }
+
+      .btn-delete {
+        background: #ff6b6b;
+        color: rgb(167, 28, 28);
+        width: 150px;
+        border-radius: 2cap;
+      }
+
+      /* แถบเมนูด้านล่าง */
+
+      .navbar {
+        display: flex;
+        justify-content: space-around;
+        background: #4db894;
+        padding: 12px 0;
+        position: fixed; /* fix ด้านล่าง */
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10; /* อยู่เหนือ content */
+      }
+
+      .navbar i {
+        font-size: 24px;
+        color: white;
+      }
+
+      a {
+        text-decoration: none; /* ทำให้เส้นใต้หายไป */
+      }
+    </style>
+
+    <!-- ใช้ CDN Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="profile-header">
+        <img src="ไก่.png" alt="avatar" width="100" />
+        <h2 id="profileName">Chicken Wichianmat</h2>
+        <p>67012345@up.ac.th</p>
+        <a href="edit-profile.html">
+          <button>แก้ไขโปรไฟล์</button>
+        </a>
+      </div>
+
+      <!-- Menu -->
+      <a href="####" class="menu-item">
+        <i class="fa-regular fa-calendar"></i>
+        <div class="text">
+          <div class="title">ปฏิทิน</div>
+          <div class="subtitle">ดูสรุปรายรับรายจ่ายในรูปแบบปฏิทิน</div>
+        </div>
+      </a>
+
+      <a href="daily-budget.html">
+        <div class="menu-item">
+          <i class="fa-solid fa-coins"></i>
+          <div class="text">
+            <div class="title">งบประมาณรายวัน</div>
+            <div class="subtitle">วางแผนจำกัดรายจ่ายต่อวัน</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="month-budget.html">
+        <div class="menu-item">
+          <i class="fa-solid fa-wallet"></i>
+          <div class="text">
+            <div class="title">งบประมาณรายเดือน</div>
+            <div class="subtitle">วางแผนจำกัดรายจ่ายต่อวัน</div>
+          </div>
+        </div>
+      </a>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-gear"></i>
+        <div class="text">
+          <div class="title">ตั้งค่า</div>
+          <div class="subtitle">ตั้งค่ารายละเอียดเพิ่มเติม</div>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-circle-info"></i>
+        <div class="text">
+          <div class="title">เกี่ยวกับ</div>
+          <div class="subtitle">เวอร์ชันและการอัพเดต</div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="action-buttons">
+        <a href="out.html"
+          ><button class="btn btn-logout">ออกจากระบบ</button></a
+        >
+        <a href="Delete.html"
+          ><button class="btn btn-delete">ลบบัญชีผู้ใช้งาน</button></a
+        >
+      </div>
+
+      <!-- Bottom Navbar -->
+      <div class="navbar">
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-th"></i>
+        <i class="fa-solid fa-chart-line"></i>
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <script>
+      // โหลดชื่อจาก localStorage ถ้ามี
+      const savedName = localStorage.getItem("profileName");
+      if (savedName) {
+        document.getElementById("profileName").textContent = savedName;
+      }
+    </script>
+  </body>
+</html>
